@@ -55,27 +55,12 @@
 			{ id: 'status', dataType: tableau.dataTypeEnum.string },
 			{ id: 'won_time', dataType: tableau.dataTypeEnum.string },
 			{ id: 'lost_time', dataType: tableau.dataTypeEnum.string },
-			{ id: '__FK_data', dataType: tableau.dataTypeEnum.string },
-			{ id: '__KEY_data', dataType: tableau.dataTypeEnum.string  },
 			{ id: 'deleted', dataType: tableau.dataTypeEnum.string  },
-			{ id: 'value', dataType: tableau.dataTypeEnum.string  },
-			{ id: 'probability', dataType: tableau.dataTypeEnum.string  },
 			{ id: 'close_time', dataType: tableau.dataTypeEnum.string  },
-			{ id: 'rotten_time', dataType: tableau.dataTypeEnum.string },
 			{ id: 'add_time', dataType: tableau.dataTypeEnum.date },
-			{ id: 'update_time', dataType: tableau.dataTypeEnum.date },
-			{ id: 'stage_change_time', dataType: tableau.dataTypeEnum.date },
 			{ id: 'stage_order_nr', dataType: tableau.dataTypeEnum.string },
 			{ id: 'stage_id', dataType: tableau.dataTypeEnum.string },
-			{ id: 'org_name', dataType: tableau.dataTypeEnum.string },
-			{ id: 'pipeline_id', dataType: tableau.dataTypeEnum.int },
 
-
-
-
-			
-
-			
 
 		];
 
@@ -251,15 +236,18 @@
 			{ id: 'icon_url', dataType: tableau.dataTypeEnum.string },
 			{ id: 'is_you', dataType: tableau.dataTypeEnum.bool },
 		];
-				var qualFaktCols = [
-			{ id: 'options', dataType: tableau.dataTypeEnum.int },
+		var qualityCols = [
+			{ id: 'id', dataType: tableau.dataTypeEnum.int },
+			{ id: 'label', dataType: tableau.dataTypeEnum.string },	
+
 
 		];
 
-						var categoryCols = [
+		var categoryCols = [
 			{ id: 'id', dataType: tableau.dataTypeEnum.int },	
+			{ id: 'label', dataType: tableau.dataTypeEnum.string },	
 			
-		];
+		]
 
 		var activitiesTable = { id: 'activities', alias: 'activities', columns: activitiesCols };
 		var dealsTable = { id: 'deals', alias: 'deals', columns: dealsCols };
@@ -270,7 +258,8 @@
 		var productsTable = { id: 'products', alias: 'products', columns: productsCols };
 		var stagesTable = { id: 'stages', alias: 'stages', columns: stagesCols };
 		var usersTable = { id: 'users', alias: 'users', columns: usersCols };
-		var categoryTable = { id: 'dealFields', alias: 'dealFields/12551', columns: categoryCols };
+		var categoryTable = { id: 'maincategory', alias: 'dealFields/12551', columns: categoryCols };
+		var qualityTable = { id: 'quality', alias: 'dealFields/12514', columns: qualityCols };
 
 
 		if (inputForm.tables.indexOf('activities') >= 0) callbackTables.push(activitiesTable);
@@ -283,6 +272,8 @@
 		if (inputForm.tables.indexOf('stages') >= 0) callbackTables.push(stagesTable);
 		if (inputForm.tables.indexOf('users') >= 0) callbackTables.push(usersTable);
 		callbackTables.push(categoryTable);
+		callbackTables.push(qualityTable);
+
 
 		schemaCallback(callbackTables);
 	};
@@ -323,7 +314,8 @@
 
 						// This is the payload we care about
 						var _data = resp.data;
-
+                        if (table.tableInfo.id === 'maincategory' || table.tableInfo.id === 'quality') {
+						    var _data = resp.data.options;}
 						// This is pagination data (if available)
 						var extra = resp.additional_data;
 
@@ -411,6 +403,7 @@
 									tableData.push(ndata);
 								}
 							}
+                            
 
 							else {
 								tableData.push(ndata);
@@ -450,7 +443,9 @@
 			if ($('#products').is(':checked')) inputForm.tables.push('products');
 			if ($('#stages').is(':checked')) inputForm.tables.push('stages');
 			if ($('#users').is(':checked')) inputForm.tables.push('users');
-			inputForm.tables.push('dealFields');
+			inputForm.tables.push('maincategory');
+			inputForm.tables.push('quality');
+
 
 			if (inputForm.startDate === '') inputForm.startDate = null;
 			if (inputForm.endDate === '') inputForm.endDate = null;
