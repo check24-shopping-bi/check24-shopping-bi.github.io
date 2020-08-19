@@ -292,7 +292,7 @@
 		var limit = 500;
 			
 		function formatURL(table, api_token, start, limit, start_date, end_date) {
-			var url = 'https://api.pipedrive.com/v1/' + table + '?api_token=' + api_token + '&start=' + start + '&limit=' + limit;
+			var url = 'https://api.pipedrive.com/v1/' + table + '?api_token=4b428bd92bbb998eab97f3beeaa183d40b472552'  + '&start=' + start + '&limit=' + limit;
 			if(inputForm.startDate !== null) url = url + '&start_date=' + inputForm.startDate;
 			if(inputForm.endDate !== null) url = url + '&end_date=' + inputForm.endDate;
 			return url;
