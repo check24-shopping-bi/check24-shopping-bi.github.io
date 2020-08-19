@@ -444,7 +444,6 @@
 			if ($('#stages').is(':checked')) inputForm.tables.push('stages');
 			if ($('#users').is(':checked')) inputForm.tables.push('users');
 			inputForm.tables.push('maincategory');
-			inputForm.tables.push('quality');
 
 
 			if (inputForm.startDate === '') inputForm.startDate = null;
