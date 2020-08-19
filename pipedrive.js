@@ -236,12 +236,7 @@
 			{ id: 'icon_url', dataType: tableau.dataTypeEnum.string },
 			{ id: 'is_you', dataType: tableau.dataTypeEnum.bool },
 		];
-		var qualityCols = [
-			{ id: 'id', dataType: tableau.dataTypeEnum.int },
-			{ id: 'label', dataType: tableau.dataTypeEnum.string },	
 
-
-		];
 
 		var categoryCols = [
 			{ id: 'id', dataType: tableau.dataTypeEnum.int },	
@@ -259,7 +254,6 @@
 		var stagesTable = { id: 'stages', alias: 'stages', columns: stagesCols };
 		var usersTable = { id: 'users', alias: 'users', columns: usersCols };
 		var categoryTable = { id: 'maincategory', alias: 'dealFields/12551', columns: categoryCols };
-		var qualityTable = { id: 'quality', alias: 'dealFields/12514', columns: qualityCols };
 
 
 		if (inputForm.tables.indexOf('activities') >= 0) callbackTables.push(activitiesTable);
@@ -272,7 +266,6 @@
 		if (inputForm.tables.indexOf('stages') >= 0) callbackTables.push(stagesTable);
 		if (inputForm.tables.indexOf('users') >= 0) callbackTables.push(usersTable);
 		callbackTables.push(categoryTable);
-		callbackTables.push(qualityTable);
 
 
 		schemaCallback(callbackTables);
